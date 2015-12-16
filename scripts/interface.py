@@ -25,11 +25,11 @@ while(1):
 	print 'Your Move'
 	columnMove = raw_input("Column: ")
 	while columnMove not in ['1','2','3','4','5','6','7']:
-		columnMove = raw_input('Please enter Column')
+		columnMove = raw_input('Please enter Column 1-7')
 
 	rowMove = raw_input("Row: ")
 	while rowMove not in ['1','2','3','4','5','6','7']:
-		rowMove = raw_input('Please enter a Row')
+		rowMove = raw_input('Please enter a Row 1-7')
 
 	dirMove = raw_input("Direction (NSEW): ")
 	while dirMove not in ['n','N','s','S','e','E','w','W']:
