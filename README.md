@@ -8,14 +8,14 @@ Since then it has been modified to only have two modes: AI vs AI and Human vs AI
 
 Below is the starting configuration. 0's are white and X's are black. White goes first.
 
-  1 2 3 4 5 6 7
-1  , , , , , , X,
-2 X, , , , , , 0,
-3 0, , , , , , X,
-4 X, , , , , , 0,
-5 0, , , , , , X,
-6 X, , , , , , 0,
-7 0, , , , , ,  ,
+  1 2 3 4 5 6 7 <br />
+1  , , , , , , X, <br />
+2 X, , , , , , 0, <br />
+3 0, , , , , , X, <br />
+4 X, , , , , , 0, <br />
+5 0, , , , , , X, <br />
+6 X, , , , , , 0, <br />
+7 0, , , , , ,  ,<br />
 
 
 Each play takes turn moving any of their piecse North (upwards), South (downwards), East (to the right) or West (to the left). You cannot move the other player's pieces or move out of bounds. You cannot take or jump over your oponent's pieces.
