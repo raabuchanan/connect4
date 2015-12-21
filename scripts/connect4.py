@@ -341,21 +341,15 @@ def myAlphaBeta(curState, curDepth, depthLimit, player, alpha, beta):
 #Mycroft is this program's AI
 #Sherlock is the oponent's (A)I
 print("Who would you like to play against?")
-mode = input("1. AI vs Human OR 2. Human vs Human?")
+mode = raw_input("1. AI vs Human OR 2. Human vs Human?")
+while mode not in ['1','2']:
+	mode = raw_input("Please press 1 or 2")
 
-# print("Which colour for AI?")
-# colour =input("1. White OR 2. Black? ")
 
-
-# if colour == 1:
-# 	player = 'white'
-# 	limit = 4
-# else:
-# 	player = "black"
-# 	limit = 5
 
 if mode == 2:
 
+	print("White player goes first")
 	curState = BEGINING_OF_GAME
 	build_board(curState,0)
 
@@ -367,12 +361,9 @@ if mode == 2:
 		build_board(nextState,0)
 		curState = nextState
 
-		#Need to check twice for end of game
-		#One for White, once for black
 		if getHeuristic(curState,1) >= 5000:
 			print'Game Over, White Wins'
 			break
-
 
 		white = getMove("Black")
 		nextState = result(curState, white)
@@ -383,130 +374,128 @@ if mode == 2:
 			print'Game Over, Black Wins'
 			break
 
+else:
+	print("Which colour for AI?")
+	colour =input("1. White OR 2. Black? ")
+	while mode not in ['1','2']:
+		colour = raw_input("Please press 1 or 2")
 
 
+	if colour == 1:
+		player = 'white'
+		limit = 4
+	else:
+		player = "black"
+		limit = 5
+
+	curState = BEGINING_OF_GAME
+	build_board(curState,0)
+
+	print ("A wild AI apears: Mycroft!")
+
+	#Hard coded for three first moves
+	#Strategy based on research of best opening moves
+	while(TURN_NUM<=2):
+
+		if player == 'white':
+			if TURN_NUM == 1:
+				mycroftMove = (1,5,'E')
+			if TURN_NUM == 2:
+				mycroftMove = (7,6,'W')
+
+			nextState = result(curState, mycroftMove)
+			build_board(nextState,0)
+			curState = nextState
+
+			print 'Mycroft\'s move:',
+			print mycroftMove
+			print STATES_EXPLORED,
+			print'States Explored'
+
+			sherlock = getMove("white")
+
+			nextState = result(curState, sherlock)
+			build_board(nextState,0)
+			curState = nextState
+
+		else:
+
+			sherlock = getMove("black")
+
+			nextState = result(curState, sherlock)
+			build_board(nextState,0)
+			curState = nextState
+
+			if TURN_NUM == 1:
+				for k in range (0,11,2):
+					if curState[k] == 1:
+						mycroftMove = (1,curState[k+1],'E')
+						break
+					elif curState[k] == 5:
+						mycroftMove = (7,curState[k+1],'W')
+					else:
+						mycroftMove = (7,5,'W')
+
+			if TURN_NUM == 2:
+				mycroftMove = myAlphaBeta(curState, 0, limit, player,-10000,10000)#Too many choices at this point
+
+			nextState = result(curState, mycroftMove)
+			build_board(nextState,0)
+			curState = nextState
+
+		TURN_NUM +=1
 
 
+	while(1):
+
+		if player == 'white':
+			
+
+			mycroftMove = myAlphaBeta(curState, 0, limit, player,-10000,10000)
+
+			nextState = result(curState, mycroftMove)
+			build_board(nextState,0)
+			curState = nextState
+
+			print 'Mycroft\'s move:',
+			print mycroftMove
+			print STATES_EXPLORED,
+			print'States Explored'
+
+			if getHeuristic(curState,1) >= 5000:
+				print'Game Over, White Wins'
+				break
+
+			sherlock = getMove("black")
+
+			nextState = result(curState, sherlock)
+			build_board(nextState,0)
+			curState = nextState
+
+			if getHeuristic(curState,1) <= -5000:
+				print'Game Over, Black Wins'
+				break
+		else:
+
+			sherlock = getMove("white")
+
+			nextState = result(curState, sherlock)
+			build_board(nextState,0)
+			curState = nextState
+
+			if getHeuristic(curState,1) <= -5000:
+				print'Game Over, Black Wins'
+				break
+
+			mycroftMove = myAlphaBeta(curState, 0, limit, player,-10000,10000)#Too many choices at this point
+
+			nextState = result(curState, mycroftMove)
+			build_board(nextState,0)
+			curState = nextState
+
+			if getHeuristic(curState,1) >= 5000:
+				print'Game Over, White Wins'
+				break
 
 
-# curState = BEGINING_OF_GAME
-# build_board(curState,0)
-
-# #Hard coded for three first moves
-# #Strategy based on research of best opening moves
-# while(TURN_NUM<=2):
-
-# 	if player == 'white':
-# 		if TURN_NUM == 1:
-# 			mycroftMove = (1,5,'E')
-# 		if TURN_NUM == 2:
-# 			mycroftMove = (7,6,'W')
-# 	else:
-# 		if TURN_NUM == 1:
-# 			for k in range (0,11,2):
-# 				if curState[k] == 1:
-# 					mycroftMove = (1,curState[k+1],'E')
-# 					break
-# 				elif curState[k] == 5:
-# 					mycroftMove = (7,curState[k+1],'W')
-# 				else:
-# 					mycroftMove = (7,5,'W')
-
-# 		if TURN_NUM == 2:
-# 			mycroftMove = myAlphaBeta(curState, 0, limit, player,-10000,10000)#Too many choices at this point
-
-# 	print 'Mycroft\'s move:',
-# 	print mycroftMove
-# 	print STATES_EXPLORED,
-# 	print'States Explored'
-
-# 	nextState = result(curState, mycroftMove)
-# 	build_board(nextState,0)
-# 	curState = nextState
-
-# 	mycroftMove = [str(mycroftMove[0]),str(mycroftMove[1]),mycroftMove[2],'\n']
-# 	mycroftMove = ''.join(mycroftMove)
-
-# 	s.send (mycroftMove)
-# 	data = s.recv(BUFF_SIZE)#Recieve echo for confirmation of send
-# 	while(len(data)<4):
-# 		time.sleep(1)
-# 		s.send (mycroftMove)
-# 		data = s.recv(BUFF_SIZE)
-
-# 	data = s.recv(BUFF_SIZE)#Listening for oponent's move
-# 	while(len(data)<4):
-# 		time.sleep(1)
-# 		data = s.recv(BUFF_SIZE)
-
-# 	sherlock = (int(data[len(data)-4]),int(data[len(data)-3]),data[len(data)-2]) 
-
-# 	print 'Oponent\'s move',
-# 	print sherlock
-# 	nextState = result(curState, sherlock)
-# 	build_board(nextState,0)
-
-# 	curState = nextState
-# 	TURN_NUM +=1
-
-# #Now the implementation of Apha Beta Pruning
-# while(1):
-# 	STATES_EXPLORED = 0
-# 	start = time.time()
-# 	mycroftMove = myAlphaBeta(curState, 0, limit, player,-10000,10000)
-# 	end = time.time()
-
-# 	print player,
-# 	print 'Move:',
-# 	print mycroftMove
-# 	print STATES_EXPLORED,
-# 	print'States Explored'
-# 	print end - start,
-# 	print "Seconds"
-
-# 	nextState = result(curState, mycroftMove)
-# 	build_board(nextState,0)
-# 	curState = nextState
-
-# 	mycroftMove = [str(mycroftMove[0]),str(mycroftMove[1]),str(mycroftMove[2]),'\n']
-# 	mycroftMove = ''.join(mycroftMove)
-
-# 	s.send (mycroftMove)
-# 	data = s.recv(BUFF_SIZE)#Recieve echo for confirmation of send
-# 	while(len(data)<4):
-# 		time.sleep(1)
-# 		s.send (mycroftMove)
-
-# 	#Need to check twice for end of game
-# 	#For when the AI is playing against itself
-# 	if getHeuristic(curState,1) >= 5000:
-# 		print'Game Over, White Wins'
-# 		break
-# 	elif getHeuristic(curState,1) <= -5000:
-# 		print'Game Over, Black Wins'
-# 		break
-
-# 	data = s.recv(BUFF_SIZE)#Listening for oponent's move
-# 	while(len(data)<4):
-# 		time.sleep(1)
-# 		data = s.recv(BUFF_SIZE)
-
-# 	#Need to check twice for end of game
-# 	#For when the AI is playing against itself
-# 	if getHeuristic(curState,1) >= 5000:
-# 		print'Game Over, White Wins'
-# 		break
-# 	elif getHeuristic(curState,1) <= -5000:
-# 		print'Game Over, Black Wins'
-# 		break
-
-# 	sherlock = (int(data[len(data)-4]),int(data[len(data)-3]),data[len(data)-2]) 
-
-# 	print 'Oponent\'s move',
-# 	print sherlock
-
-# 	nextState = result(curState, sherlock)
-# 	build_board(nextState,0)
-# 	curState = nextState
-
-
+		TURN_NUM +=1
