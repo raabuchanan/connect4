@@ -22,7 +22,3 @@ Each play takes turn moving any of their piecse North (upwards), South (downward
 
 The game is won when you have four pieces lined up in a row. It can be horizontally, vertically or diagonally.
 
-##To Run
-
-Simply run the python script and follow the directions.
-
