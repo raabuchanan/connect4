@@ -18,7 +18,7 @@ Below is the starting configuration. 0's are white and X's are black. White goes
 7 0, , , , , ,  ,<br />
 
 
-Each play takes turn moving any of their piecse North (upwards), South (downwards), East (to the right) or West (to the left). You cannot move the other player's pieces or move out of bounds. You cannot take or jump over your oponent's pieces.
+Each player takes turn moving any of their pieces North (upwards), South (downwards), East (to the right) or West (to the left). You cannot move the other player's pieces or move out of bounds. You cannot take or jump over your oponent's pieces.
 
 The game is won when you have four pieces lined up in a row. It can be horizontally, vertically or diagonally.
 
